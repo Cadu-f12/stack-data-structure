@@ -4,51 +4,50 @@
 #include "pilha.h"
 
 typedef struct Pilha_ {
-    int head;
-    int stack[10];
+    int capacity;
+    int size;
+    int *stack;
 } Pilha;
 
+int show(Pilha *pilha);
+
 int main() {
-    Pilha *stack = create_stack(); 
+    Pilha *pilha = create_stack(3);
 
-    int user;
-    do {
-        printf("[1] Empilhar\n");
-        printf("[2] Desempilhar\n");
-        printf("[3] Pegar da pilha\n");
-        printf("Escolha um dos 3 digitos ou insira qualquer outro valor para sair: ");
-        
-        scanf("%d", &user);
+    printf("size: %d \n", pilha->size);
 
-        if(user == 1) {
-            printf("Insira um número para empilhar: ");
-            int num;
-            scanf("%d", &num);
-            
+    push(pilha, 2);
+    printf("push 2\nsize: %d \n", pilha->size);
 
-            system("clear");
-            system("sleep 0.5");
+    int deleted;
+    pop(pilha, &deleted);
+    printf("pop\nsize: %d\n", pilha->size);
 
-            push(stack, num);
-            printf("Valor %d inserido na pilha!\n\n", num);
-        } else if(user == 2) {
-            system("clear");
-            system("sleep 0.5");
-            
-            int del;
-            
-            pop(stack, &del);
+    push(pilha, 4);
+    printf("push 4\nsize: %d\n", pilha->size);
 
-            printf("Valor retirado da pilha: %d\n\n", del);
-        } else if(user == 3) {
-            system("clear");
-            system("sleep 0.5");
+    push(pilha, 6);
+    printf("push 6\nsize: %d\n", pilha->size);
 
-            int exi = peek(stack);
-            printf("Valor pego da pilha: %d\n\n", exi);
-        }
-    } while(user == 1 || user == 2 || user == 3);
+    push(pilha, 8);
+    printf("push 8\nsize: %d\n", pilha->size);
 
-    free_stack(stack);
+    push(pilha, 10);
+    printf("push 10\nsize: %d\n", pilha->size);
+
+    pop(pilha, &deleted);
+    printf("pop\nsize: %d\n", pilha->size);
+
+    show(pilha);
+
+    free_stack(pilha);
     return 0;
+}
+
+int show(Pilha *pilha) {
+    for(int i = 0; i < pilha->capacity; i++) {
+        int a = pilha->stack[i];
+
+        printf("%d: %d\n", i, a);
+    }
 }

@@ -4,12 +4,27 @@
 #include "pilha.h"
 
 typedef struct Pilha_ {
+    int capacity;
     int size;
-    int stack[10];
+    int *stack;
 } Pilha;
 
-Pilha* create_stack() {
+Pilha *create_stack(int capacity) {
     Pilha *pilha = malloc(sizeof(Pilha));
+
+    if(!pilha) {
+        printf("Stack is NULL");
+        return NULL;
+    }
+
+    pilha->capacity = capacity;
+
+    pilha->stack = malloc(sizeof(int) * capacity);
+
+    if(!pilha->stack) {
+        printf("Stack->stack is NULL");
+        return NULL;
+    }
 
     pilha->size = 0;
 
@@ -18,11 +33,11 @@ Pilha* create_stack() {
 
 int push(Pilha *pilha, int value) {
     if(!pilha) {
-        printf("A pilha está apontando para NULL\n");
+        printf("Stack is NULL\n");
         return 0;
     }
-    if(pilha->size == 10) {
-        printf("A pilha está cheia!\n");
+    if(pilha->size == pilha->capacity) {
+        printf("Stack is FULL\n");
         return 0;
     }
 
@@ -36,17 +51,17 @@ int pop(Pilha *pilha, int *value) {
     int head = pilha->size - 1;
     
     if(!pilha) {
-        printf("A pilha está apontando para NULL\n");
+        printf("Stack is NULL\n");
         return 0;
     }
     if(pilha->size == 0) {
-        printf("A pilha está vazia!\n");
+        printf("Stack is EMPTY!\n");
         *value = 0;
         return 0;
     }
 
     *value = pilha->stack[head];
-    pilha->size--;
+    pilha->size--;  
 
     return 1;
 }
@@ -55,11 +70,11 @@ int peek(Pilha *pilha) {
     int head = pilha->size - 1;
     
     if(!pilha) {
-        printf("A pilha está apontando para NULL\n");
+        printf("Stack is NULL\n");
         return 0;
     }
     if(pilha->size == 0) {
-        printf("A pilha está sem elementos!\n");
+        printf("Stack is NULL\n");
         return 0;
     }
 

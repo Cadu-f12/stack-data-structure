@@ -1,6 +1,6 @@
 typedef struct Pilha_ Pilha;
 
-Pilha* create_stack();
+Pilha* create_stack(int capacity);
 
 int push(Pilha *pilha, int value);
 
