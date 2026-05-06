@@ -26,6 +26,22 @@ Através do menu interativo, é possível realizar:
 
 ## 🚀 Como Executar
 
-1. Compile o projeto:
-   ```bash
-   gcc ./main.c
+0. Clonar projeto:
+``` bash
+git clone <http/ssh>
+```
+
+1. Entrar no projeto:
+``` bash
+cd stack-data-structure/src/
+```
+
+2. Compilar arquivo (Caso seu sistema não seja LINUX):
+```bash
+gcc main.c pilha.h -o main.exe
+```
+
+3. Iniciar o executável:
+```bash
+./main.exe
+```
